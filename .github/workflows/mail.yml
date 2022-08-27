@@ -7,12 +7,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    step:
+    steps:
       - uses: actions/checkout@master
       - name: Publish to registy
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           registry: docker.pkg.github.com
-          name: myDocker/repository
+          name: docker.pkg.github.com/sinedviper/blog-nestjs-typescript.git
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: 'develops'
