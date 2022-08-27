@@ -1,3 +1,4 @@
+import { TelegramService } from './../telegram/telegram.service';
 import {
   Body,
   Controller,
@@ -20,12 +21,25 @@ import { REVIEW_NOT_FOUND } from './review.constants';
 
 @Controller('review')
 export class ReviewController {
-  constructor(private readonly reviewService: ReviewService) {}
+  constructor(
+    private readonly reviewService: ReviewService,
+    private readonly telegramService: TelegramService,
+  ) {}
 
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateReviewDto) {
     return this.reviewService.create(dto);
+  }
+
+  @UsePipes(new ValidationPipe())
+  @Post('notify')
+  async notify(@Body() dto: CreateReviewDto) {
+    const message =
+      `Name: ${dto.name}\n` +
+      `Title: ${dto.title}\n` +
+      `Describe: ${dto.description}\n`;
+    return this.telegramService.sendMessage(message);
   }
 
   @UseGuards(JwtAuthGuard)
