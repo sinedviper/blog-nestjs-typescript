@@ -1,3 +1,4 @@
+import { HhModule } from './../hh/hh.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { Module } from '@nestjs/common';
@@ -18,7 +19,9 @@ import { TopPageService } from './top-page.service';
       },
     ]),
     ConfigModule,
+    HhModule,
   ],
   providers: [TopPageService],
+  exports: [TopPageService],
 })
 export class TopPageModule {}
