@@ -11,7 +11,7 @@ import {
 import { AuthDto } from './dto/auth.dto';
 import { ALREADY_REGISTERED } from './auth.constants';
 
-@Controller('User')
+@Controller('user')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
